@@ -2,37 +2,74 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerInput))]
+
 public class playermovement : MonoBehaviour
 {
-    PlayerInput playerInput;
-    Rigidbody rb;
+    private Rigidbody2D rb;
+    private PlayerInput playerInput;
 
     public float velocidad = 5f;
-    private Vector2 movementInput;
+    public float fuerzaSalto = 8f;
+
+    public Transform detectorSuelo;
+    public float distanciaSuelo = 0.15f;
+    public LayerMask suelo;
+
+    private Vector2 movimiento;
+    private bool estaEnSuelo;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
     }
 
     void Update()
     {
-        movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
+        // Movimiento WASD
+        movimiento = playerInput.actions["Move"].ReadValue<Vector2>();
+
+        // Detectar el suelo con Raycast
+        estaEnSuelo = Physics2D.Raycast(
+            detectorSuelo.position,
+            Vector2.down,
+            distanciaSuelo,
+            suelo
+        );
+
+        // Saltar todas las veces que quieras
+        if (Keyboard.current != null &&
+            Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            rb.linearVelocity = new Vector2(
+                rb.linearVelocity.x,
+                fuerzaSalto
+            );
+        }
     }
 
     void FixedUpdate()
     {
-        Vector3 movement = new Vector3(
-            movementInput.x,
-            0f,
-            movementInput.y
+        // Movimiento horizontal
+        rb.linearVelocity = new Vector2(
+            movimiento.x * velocidad,
+            rb.linearVelocity.y
         );
+    }
 
-        rb.linearVelocity = new Vector3(
-            movement.x * velocidad,
-            rb.linearVelocity.y,
-            movement.z * velocidad
-        );
+    // Dibujar el Raycast
+    void OnDrawGizmos()
+    {
+        if (detectorSuelo != null)
+        {
+            Gizmos.color = Color.red;
+
+            Gizmos.DrawLine(
+                detectorSuelo.position,
+                detectorSuelo.position + Vector3.down * distanciaSuelo
+            );
+        }
     }
 }
