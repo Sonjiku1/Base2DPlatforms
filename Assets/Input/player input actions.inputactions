@@ -1,0 +1,96 @@
+{
+    "version": 1,
+    "name": "player input actions",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "4181922b-7845-4b46-b28e-295d01aa034e",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "396144b6-d459-424b-a39e-f0c4fa1706b9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "2f47fb0c-e5b7-4c54-b6b9-a62213d279df",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "a125f852-add3-49f1-a47a-e4a642159b18",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Teclado",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "14cb19a3-ff47-4369-b9cc-c5a0e5306ee6",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Down",
+                    "id": "80990919-f7e4-4eda-8b04-4e8f323e2301",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "76ce6094-13e3-4690-84f9-d8722847b73e",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Teclado",
+            "bindingGroup": "Teclado",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>/{Back}",
+                    "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
